@@ -10,5 +10,5 @@ urlpatterns = [
     path("fail", views.fail, name="fail"),
     path("create", views.create, name="create"),
     path("change", views.chan, name="chan"),
-    path("wiki/change/<str:name>", views.change, name="change")
+    path("wiki/<str:name>/change/", views.change, name="change")
 ]
