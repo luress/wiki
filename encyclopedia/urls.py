@@ -10,5 +10,6 @@ urlpatterns = [
     path("fail", views.fail, name="fail"),
     path("create", views.create, name="create"),
     path("change", views.chan, name="chan"),
-    path("wiki/<str:name>/change/", views.change, name="change")
+    path("wiki/<str:name>/change/", views.change, name="change"),
+    path("random", views.random_choice, name="random")
 ]

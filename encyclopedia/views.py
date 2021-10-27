@@ -1,6 +1,7 @@
 from re import X
 from django.http.response import HttpResponseRedirect
 import markdown as md
+import random
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.forms.fields import CharField
@@ -72,3 +73,12 @@ def title(request, name):
         "bod" : md.markdown(util.get_entry(f"{name}")),
         "name" : name.capitalize()
     })
+
+def random_choice(request):
+    titles = util.list_entries()
+    random_title = random.choice(titles)
+    return render(request, "encyclopedia/title.html", {
+        "bod" : md.markdown(util.get_entry(f"{random_title}")),
+        "name" : random_title.capitalize()
+    })
+    
