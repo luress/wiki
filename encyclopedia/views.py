@@ -54,7 +54,10 @@ def change(request, name):
     form_change = ChangeTitle(request.POST)
     form = ChangeTitle(initial={'change_form': f"{name}", 'form_content' : util.get_entry(f"{name}")})
     if form_change.is_valid() and body_content.is_valid():
-        pass
+        tit = body_content.cleaned_data["change_form"]
+        content = form_change.cleaned_data["form_content"]
+        util.save_entry(tit, content)
+        return HttpResponseRedirect(reverse(f"encyclopedia:index"))
     return render(request, "encyclopedia/change.html", {
         "form": form,
     })

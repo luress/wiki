@@ -4,7 +4,9 @@
 
 {% block body %}
     <form method="post">
+        {% csrf_token %}
         {{ form }}
         {{ name }}
+        <input type="submit" name="Change">
     </form>
 {% endblock %}
