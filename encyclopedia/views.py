@@ -19,6 +19,8 @@ class ChangeTitle(forms.Form):
     form_content = CharField(label="Write an article", widget=forms.Textarea)
 
 
+
+
 def index(request):
     return render(request, "encyclopedia/index.html", {
         "entries": util.list_entries()
@@ -82,3 +84,19 @@ def random_choice(request):
         "name" : random_title.capitalize()
     })
     
+def search(request):
+    entries = []
+    if request.method == 'POST':
+        form = request.POST
+        temp = util.list_entries()
+        results = [i.lower() for i in temp]
+        if form['q'].lower() in results:
+            return HttpResponseRedirect(f"wiki/{form['q']}")
+        else:
+            for i in results:
+                if form in i:
+                    entries.append(i)
+            return render(request, "encyclopedia/search.html",{
+                "entry": results
+                })
+            
